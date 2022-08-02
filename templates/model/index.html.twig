@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Models {% endblock %}
+
+{% block body %}
+    <h1> Show All Models </h1>
+    <br>
+    <h4> There are {{ models|length }} models available </h4>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+
+                {% set firstLetter = '' %}
+                {% for model in models|sort((a, b) => a.name|lower <=> b.name|lower) %}
+
+                {% if model.name|first|lower matches '/^\\d+$/' %}
+                </ul>
+                <ul class="list-group">
+                    {% endif %}
+                    {% if firstLetter != model.name|first|lower and model.name|first|lower matches '/[a-zA-Z]+/' %}
+                </ul>
+                <ul class="list-group">
+                    {{ model.name|first|upper }}
+
+                    {% endif %}
+                    <li class="list-group-item" style="background-color: cadetblue">
+                        <b>{{ model.name }} </b> belongs to a brand {{ model.brand.name }}<br>
+                        <a class="btn btn-secondary" href="{{ path('model_show_one', {'model':  model.id }) }}">
+                            Show </a>
+                        <a class="btn btn-primary" href="{{ path('model_update', {'model':  model.id }) }}"> Update </a>
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ model.id }}">
+                            Delete </a>
+                        <div class="modal fade" id="exampleModal-{{ model.id }}" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"> Warning </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you 100% on that?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Nah
+                                        </button>
+                                        <a class="btn btn-danger"
+                                           href="{{ path('model_delete', {'model':  model.id }) }}"> EXTERMINATE!! </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    {% set firstLetter = model.name|first|lower %}
+                    {% endfor %}
+                </ul>
+
+
+            </div>
+        </div>
+        <br>
+        <a class="btn btn-success" href="{{ path('model_create') }}"> Create New </a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Show One Brand {% endblock %}
+
+{% block body %}
+    <h1> Show One Brand </h1>
+    <br>
+    <div class="container-fluid justify-content-start">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"> Brand {{ brand.id }} </h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> Name: {{ brand.name }} </h6>
+                        <p class="card-text">
+                            Country: {{ brand.country }}<br>
+                            Models: {{ models|length }}<br>
+                        </p>
+                        <a class="btn btn-primary" href="{{ path('brand_update', {'brand': brand.id}) }}"> Update </a>
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ brand.id }}" > Delete </a>
+                        {#                        <a class="btn btn-danger" href="{{ path('brand_delete', {'brand': brand.id}) }}"> Delete </a>#}
+                        <div class="modal fade" id="modal-{{ brand.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"> Warning </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this item?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+                                        <a class="btn btn-danger" href="{{ path('brand_delete', {'brand': brand.id}) }}"> Delete </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h4> Models: </h4>
+
+                <ul class="list-group">
+                    {% set firstLetter = '' %}
+                    {% for model in models|sort((a, b) => a.name|lower <=> b.name|lower) %}
+                    {% if firstLetter != model.name|first %}
+                    {{ model.name|upper|first }}
+                </ul>
+                <ul class="list-group">
+                    {% endif %}
+                    <li class="list-group-item" style="background-color: lightgray">
+                        <b>{{ model.name }} </b> <br>
+                    </li>
+                    {% set firstLetter = model.name|first %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <br>
+        {{ form(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Models {% endblock %}
+
+{% block body %}
+    <h1> Show All Models </h1>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"> Model {{ model.id }}</h5>
+                        <p class="card-text">
+                            Name: {{ model.name }}<br>
+                            Brand: {{ model.brand.name }}<br>
+                        </p>
+                        <a class="btn btn-primary" href="{{ path('model_update', {'model':  model.id }) }}"> Update </a>
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ model.id }}">
+                            Delete </a>
+                        <div class="modal fade" id="exampleModal-{{ model.id }}" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"> Warning </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you 100% on that?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Nah
+                                        </button>
+                                        <a class="btn btn-danger"
+                                           href="{{ path('model_delete', {'model':  model.id }) }}"> EXTERMINATE!! </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

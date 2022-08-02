@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Show All Brands {% endblock %}
+
+{% block body %}
+    <h1> Show All Brands </h1>
+    <br>
+    <h2 style="font-size: 15px"> We have {{ brands|length }} brands in our database. </h2>
+    <br>
+    <div class="container-fluid justify-content-start">
+        <div class="row">
+            <div class="col-lg-3">
+
+                {% set array = [] %}
+
+                {% for brand in brands|sort((a, b) => a.name|lower <=> b.name|lower) %}
+                    {% set letter = brand.name|first %}
+                    {% if array[letter] is not defined %}
+                        {% set array = array|merge({(letter): []}) %}
+                    {% endif %}
+                    {% set array = array|merge({(letter): array[letter]|merge([brand])}) %}
+                {% endfor %}
+
+
+                {% for letter,brands in array %}
+                    {{ letter }}
+                    <ul class="list-group">
+                        {% for brand in brands %}
+                            <li class="list-group-item" style="background-color: lightgray">
+                                <b>{{ brand.name }} </b> ({{ brand.country }}) <br>
+                                <i> Number of models: {{ brand.models|length }} </i>
+                                <a class="btn btn-secondary" href="{{ path('brand_show_one', {'brand': brand.id}) }}">
+                                    Show </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -11,10 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class BrandWithManyModelsType extends AbstractType
 {
-    /**
-     * @var BrandRepository
-     */
-    private $brandRepository;
+    private BrandRepository $brandRepository;
 
     public function __construct(BrandRepository $brandRepository)
     {
@@ -33,5 +30,4 @@ class BrandWithManyModelsType extends AbstractType
         ])
             ->add('submit', SubmitType::class);
     }
-
 }

@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Repository;
+<?php namespace App\Repository;
 
 use App\Entity\Brand;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -17,11 +15,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BrandRepository extends ServiceEntityRepository
 {
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Brand::class);
-
     }
 
     public function add(Brand $entity, bool $flush = false): void
@@ -44,7 +40,6 @@ class BrandRepository extends ServiceEntityRepository
 
     public function findBrandsWithManyModels(int $number): array
     {
-
         $qb = $this->createQueryBuilder('brand')
             ->innerJoin('brand.models', 'model')
             ->groupBy('brand.id')
@@ -55,5 +50,4 @@ class BrandRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
-
 }

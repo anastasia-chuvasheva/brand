@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Repository;
+<?php namespace App\Repository;
 
 use App\Entity\Brand;
 use App\Entity\Model;
@@ -52,5 +50,4 @@ class ModelRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
-
 }

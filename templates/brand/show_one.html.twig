@@ -18,7 +18,6 @@
                         </p>
                         <a class="btn btn-primary" href="{{ path('brand_update', {'brand': brand.id}) }}"> Update </a>
                         <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ brand.id }}" > Delete </a>
-                        {#                        <a class="btn btn-danger" href="{{ path('brand_delete', {'brand': brand.id}) }}"> Delete </a>#}
                         <div class="modal fade" id="modal-{{ brand.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">

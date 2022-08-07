@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Entity;
+<?php namespace App\Entity;
 
 use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\ArrayCollection;

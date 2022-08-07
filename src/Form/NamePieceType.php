@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Form;
+<?php namespace App\Form;
 
 use App\Repository\BrandRepository;
 use Symfony\Component\Form\AbstractType;
@@ -10,10 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class NamePieceType extends AbstractType
 {
-    /**
-     * @var BrandRepository
-     */
-    private $brandRepository;
+    private BrandRepository $brandRepository;
 
     public function __construct(BrandRepository $brandRepository)
     {
@@ -26,5 +21,4 @@ class NamePieceType extends AbstractType
            ->add('piece', TextType::class)
            ->add('submit', SubmitType::class);
     }
-
 }

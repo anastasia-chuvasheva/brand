@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Controller;
+<?php namespace App\Controller;
 
 use App\Entity\Model;
 use App\Form\ModelType;
@@ -26,7 +24,6 @@ class ModelController extends AbstractController
     #[Route('/model/show/{model}', name: 'model_show_one')]
     public function showOne(Model $model): Response
     {
-
         return $this->render('model/show_one.html.twig', [
             'model' => $model,
         ]);
@@ -35,16 +32,15 @@ class ModelController extends AbstractController
     #[Route('/model/create', name: 'model_create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $model = new Model();
-
-        $form = $this->createForm(ModelType::class, $model);
+        $form = $this->createForm(ModelType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $model = $form->getData();
+
             $entityManager->persist($model);
             $entityManager->flush();
+
             return $this->redirectToRoute('model_show_all');
         }
 
@@ -60,8 +56,8 @@ class ModelController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $model = $form->getData();
+
             $entityManager->persist($model);
             $entityManager->flush();
 
@@ -76,11 +72,9 @@ class ModelController extends AbstractController
     #[Route('/model/delete/{model}', name: 'model_delete')]
     public function delete(EntityManagerInterface $entityManager, Model $model): Response
     {
-
         $entityManager->remove($model);
         $entityManager->flush();
 
         return $this->redirectToRoute('model_show_all');
-
     }
 }

@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Form;
+<?php namespace App\Form;
 
 use App\Entity\Brand;
 use App\Repository\BrandRepository;
@@ -11,12 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ModelType extends AbstractType
-
 {
-    /**
-     * @var BrandRepository
-     */
-    private $brandRepository;
+    private BrandRepository $brandRepository;
 
     public function __construct(BrandRepository $brandRepository){
 
@@ -34,5 +28,4 @@ class ModelType extends AbstractType
             ->add('name', TextType::class)
             ->add('submit', SubmitType::class);
     }
-
 }

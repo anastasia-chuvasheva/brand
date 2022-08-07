@@ -52,16 +52,12 @@
                             </div>
                         </div>
                     </li>
-
                     {% set firstLetter = model.name|first|lower %}
                     {% endfor %}
                 </ul>
-
-
             </div>
         </div>
         <br>
         <a class="btn btn-success" href="{{ path('model_create') }}"> Create New </a>
     </div>
-
 {% endblock %}

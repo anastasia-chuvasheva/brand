@@ -35,6 +35,7 @@ class ModelController extends AbstractController
         $form = $this->createForm(ModelType::class);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $model = $form->getData();
 
